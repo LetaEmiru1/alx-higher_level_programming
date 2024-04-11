@@ -7,7 +7,7 @@ class Square extends Square5 {
       c = 'X';
     }
     for (let i = 0; i < this.height; i++){
-      s = '';
+      let s = '';
       for (let j = 0; j < this.width; j++){
         s += c;
       }
