@@ -1,6 +1,6 @@
 #!/usr/bin/node
 
-class Square extends Rectange {
+class Square extends Rectangle {
   constructor (size) {
     super(width, height);
     this.size = size;
