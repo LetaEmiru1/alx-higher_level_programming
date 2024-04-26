@@ -1,24 +1,36 @@
-#!/usr/bin/python3
-"""script for finding peak in list of ints, interview prep
-"""
-
-"""
-    THOUGHT PROCESS
-        it is not sorted, so sorting would take n(log(n))
-            -> not worth sorting
-        looping through and keeping track of max (brute force)
-            -> O(n)
-
-        possibly looping from each end reducing to 1/2 run time
-            -> still O(n)
-"""
-
-
 def find_peak(list_of_integers):
-    """BRUTE force implementation for question
+  """
+  Finds a peak element in an unsorted list of integers.
+
+  Args:
+      list_of_integers: A list of integers.
+
+  Returns:
+      The index of a peak element in the list, or None if no peak is found.
+  """
+  if not list_of_integers:
+      return None  # Empty list has no peak
+
+  def find_peak_helper(start, end):
     """
-    max_i = None
-    for ele in list_of_integers:
-        if max_i is None or max_i < ele:
-            max_i = ele
-    return max_i
+    Helper function to find a peak using binary search.
+
+    Args:
+        start: The starting index of the sublist.
+        end: The ending index (exclusive) of the sublist.
+
+    Returns:
+        The index of a peak element in the sublist, or None if no peak is found.
+    """
+    if start == end - 1:
+      return start if list_of_integers[start] > list_of_integers[end] else end
+    mid = start + (end - start) // 2
+    if list_of_integers[mid] > list_of_integers[mid - 1] and list_of_integers[mid] > list_of_integers[mid + 1]:
+      return mid
+    elif list_of_integers[mid] < list_of_integers[mid - 1]:
+      return find_peak_helper(start, mid)
+    else:
+      return find_peak_helper(mid + 1, end)
+
+  return find_peak_helper(0, len(list_of_integers))
+
