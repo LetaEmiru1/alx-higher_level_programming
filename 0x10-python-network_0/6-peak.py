@@ -1,30 +1,24 @@
+#!/usr/bin/python3
+"""script for finding peak in list of ints, interview prep
+"""
+
+"""
+    THOUGHT PROCESS
+        it is not sorted, so sorting would take n(log(n))
+            -> not worth sorting
+        looping through and keeping track of max (brute force)
+            -> O(n)
+
+        possibly looping from each end reducing to 1/2 run time
+            -> still O(n)
+"""
+
+
 def find_peak(list_of_integers):
+    """BRUTE force implementation for question
     """
-    Finds a peak element in an unsorted list of integers.
-
-    Args:
-        list_of_integers (List[int]): The input list of integers.
-
-    Returns:
-        int: The index of a peak element, or None if the list is empty.
-
-    Complexity:
-        Time: O(log(n)) using binary search.
-        Space: O(1) (constant space).
-
-    Note: There may be more than one peak in the list.
-    """
-    n = len(list_of_integers)
-    if n == 0:
-        return None
-
-    left, right = 0, n - 1
-    while left < right:
-        mid = left + (right - left) // 2
-        if list_of_integers[mid] > list_of_integers[mid + 1]:
-            right = mid
-        else:
-            left = mid + 1
-
-    return left
-
+    max_i = None
+    for ele in list_of_integers:
+        if max_i is None or max_i < ele:
+            max_i = ele
+    return max_i
